@@ -14,8 +14,7 @@ export default {
       return new Response(null, { headers: corsHeaders });
     }
 
-    const apiKey =
-      "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"; // Make sure to name your secret OPENAI_API_KEY in the Cloudflare Workers dashboard
+    const apiKey = env.OPENAI_API_KEY;
     const apiUrl = "https://api.openai.com/v1/chat/completions";
     const userInput = await request.json();
 
