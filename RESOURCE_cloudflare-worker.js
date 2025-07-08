@@ -14,6 +14,7 @@ export default {
       return new Response(null, { headers: corsHeaders });
     }
 
+    // Use the correct environment variable name for the OpenAI API key
     const apiKey = env.OPENAI_API_KEY;
     const apiUrl = "https://api.openai.com/v1/chat/completions";
     const userInput = await request.json();
@@ -36,6 +37,9 @@ export default {
     });
 
     const data = await response.json();
+
+    // Log the response for debugging
+    console.log("OpenAI API response:", data);
 
     return new Response(JSON.stringify(data), { headers: corsHeaders });
   },

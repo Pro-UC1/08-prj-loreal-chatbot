@@ -3,9 +3,23 @@ const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
 const chatWindow = document.getElementById("chatWindow");
 
+/* Add the L'Oréal logo image at the top of the chat window */
+// You can use a public L'Oréal logo or save one in your project folder and use a relative path.
+const lorealLogo = document.createElement("img");
+lorealLogo.src =
+  "https://upload.wikimedia.org/wikipedia/commons/6/6e/Logo_L%E2%80%99Or%C3%A9al.svg"; // Public L'Oréal logo
+lorealLogo.alt = "L'Oréal Logo";
+lorealLogo.style.width = "120px";
+lorealLogo.style.display = "block";
+lorealLogo.style.margin = "16px auto";
+chatWindow.appendChild(lorealLogo);
+
 /* Set initial welcome message */
-chatWindow.textContent =
+const welcomeMsg = document.createElement("div");
+welcomeMsg.textContent =
   "👋 Hello! I’m your L’Oréal shopping assistant. Ask me about makeup, skincare, haircare, fragrances, or routines!";
+welcomeMsg.className = "msg ai";
+chatWindow.appendChild(welcomeMsg);
 
 /* Replace with your deployed Cloudflare Worker URL */
 const WORKER_URL = "https://snowy-dawn-ebc7.rneha2729.workers.dev/";
@@ -58,9 +72,14 @@ chatForm.addEventListener("submit", async (e) => {
     chatWindow.lastChild.remove();
 
     // Get the assistant's reply and add it to chat and history
-    const aiReply =
-      data.choices?.[0]?.message?.content ||
-      "Sorry, I couldn't get a response.";
+    let aiReply;
+    if (data.choices?.[0]?.message?.content) {
+      aiReply = data.choices[0].message.content;
+    } else if (data.error?.message) {
+      aiReply = `Error: ${data.error.message}`;
+    } else {
+      aiReply = "Sorry, I couldn't get a response.";
+    }
     addMessage("ai", aiReply);
     messages.push({ role: "assistant", content: aiReply });
   } catch (err) {
