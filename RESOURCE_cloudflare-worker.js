@@ -15,7 +15,8 @@ export default {
     }
 
     // Use the correct environment variable name for the OpenAI API key
-    const apiKey = env.OPENAI_API_KEY;
+    const apiKey = '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;'
+    
     const apiUrl = "https://api.openai.com/v1/chat/completions";
     const userInput = await request.json();
 
