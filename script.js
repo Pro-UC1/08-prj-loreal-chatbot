@@ -22,7 +22,7 @@ welcomeMsg.className = "msg ai";
 chatWindow.appendChild(welcomeMsg);
 
 /* Replace with your deployed Cloudflare Worker URL */
-const WORKER_URL = "https://snowy-dawn-ebc7.rneha2729.workers.dev/";
+const WORKER_URL = "https://holy-sound-7357.rneha2729.workers.dev";
 
 /* Store the conversation history */
 let messages = [
