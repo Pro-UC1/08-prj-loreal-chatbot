@@ -56,11 +56,11 @@ body {
   padding: 24px 16px 16px 16px;
   min-height: 350px;
   margin-bottom: 16px;
-  box-shadow: 0 2px 12px rgba(174, 145, 66, 0.08);
+  box-shadow: 0 2px 12px rgba(194, 156, 53, 0.08);
   font-size: 18px;
   line-height: 1.5;
   overflow-y: auto;
-  background: #fff;
+  background: #ffffff;
   white-space: pre-line;
 }
 
@@ -71,8 +71,9 @@ body {
 }
 
 .msg.user {
-  background: #f5e6c8;
-  color: #231f20;
+   
+  background: #a47923;
+  color: #f4f0f1;
   border-radius: 16px 16px 4px 16px;
   padding: 10px 16px;
   margin: 8px 0;
@@ -176,9 +177,23 @@ body {
   text-decoration: underline;
 }
 
+/* latest question styling */
+.latest-question {
+  margin: 12px 0 4px 0;
+  font-weight: bold;
+  color: #f1f6f1;
+  background:#ae9142;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .chat-window {
     padding: 12px 4px 8px 4px;
+     color: #fff8ef;
+    background: #231f20;
+
+
   }
 }
