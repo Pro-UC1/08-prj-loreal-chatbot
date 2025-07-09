@@ -44,14 +44,23 @@ body {
   height: auto;
 }
 
-/* chat window */
+/* --- L'Oréal Chatbox Styling: Distinct Bubbles for User & Assistant --- */
+
+/* Chatbox container */
 .chatbox {
   margin: 40px 0;
+  background: #fff8ef; /* light gold background */
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(174, 145, 66, 0.1);
+  padding: 24px 0 8px 0;
 }
 
+/* Chat window area */
 .chat-window {
+  display: flex;
+  flex-direction: column;
   height: 360px;
-  border: 2px solid #ae9142;
+  border: 2px solid #ae9142; /* L'Oréal gold */
   border-radius: 12px;
   padding: 24px 16px 16px 16px;
   min-height: 350px;
@@ -64,30 +73,51 @@ body {
   white-space: pre-line;
 }
 
-/* messages */
-.msg {
-  margin-bottom: 14px;
+/* Message bubble base */
+.msg,
+.user-msg,
+.bot-msg {
+  display: inline-block;
+  margin: 8px 0;
+  padding: 10px 16px;
+  max-width: 80%;
+  word-break: break-word;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
-.msg.user {
-   
-  background: #a47923;
-  color: #f4f0f1;
-  border-radius: 16px 16px 4px 16px;
-  padding: 10px 16px;
-  margin: 8px 0;
+/* User message bubble */
+.msg.user,
+.user-msg {
   align-self: flex-end;
-  max-width: 80%;
+  background: linear-gradient(90deg, #ae9142 80%, #fff8ef 100%);
+  color: #231f20;
+  border-radius: 16px 16px 4px 16px;
+  font-weight: 500;
+  border: 1.5px solid #ae9142;
+  margin-left: auto;
 }
 
-.msg.ai {
+/* Assistant (bot) message bubble */
+.msg.ai,
+.bot-msg {
+  align-self: flex-start;
   background: #231f20;
   color: #fff8ef;
   border-radius: 16px 16px 16px 4px;
-  padding: 10px 16px;
-  margin: 8px 0;
-  align-self: flex-start;
+  border: 1.5px solid #ae9142;
+  margin-right: auto;
+}
+
+/* latest question highlight */
+.latest-question {
+  margin: 12px 0 4px 0;
+  font-weight: bold;
+  color: #231f20;
+  background: #fff8ef;
+  border-left: 4px solid #ae9142;
+  padding: 8px 12px;
+  border-radius: 6px;
   max-width: 80%;
 }
 
@@ -105,10 +135,12 @@ body {
   border-radius: 8px;
   font-size: 1rem;
   font-family: "Montserrat", Arial, sans-serif;
+  background: #fff8ef;
+  color: #231f20;
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
+  outline: 2px solid #ae9142;
   outline-offset: 2px;
 }
 
@@ -136,7 +168,7 @@ body {
 }
 
 .chat-form button:focus {
-  outline: 2px solid #000;
+  outline: 2px solid #ae9142;
   outline-offset: 2px;
 }
 
@@ -177,23 +209,11 @@ body {
   text-decoration: underline;
 }
 
-/* latest question styling */
-.latest-question {
-  margin: 12px 0 4px 0;
-  font-weight: bold;
-  color: #f1f6f1;
-  background:#ae9142;
-  padding: 6px 12px;
-  border-radius: 6px;
-}
-
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .chat-window {
     padding: 12px 4px 8px 4px;
-     color: #fff8ef;
+    color: #fff8ef;
     background: #231f20;
-
-
   }
 }
