@@ -3,23 +3,6 @@ const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
 const chatWindow = document.getElementById("chatWindow");
 
-/* Add the L'Oréal logo image at the top of the chat window */
-// You can use a public L'Oréal logo or save one in your project folder and use a relative path.
-const lorealLogo = document.createElement("img");
-lorealLogo.src =
-  "https://upload.wikimedia.org/wikipedia/commons/6/6e/Logo_L%E2%80%99Or%C3%A9al.svg"; // Public L'Oréal logo
-lorealLogo.alt = "L'Oréal Logo";
-lorealLogo.style.width = "120px";
-lorealLogo.style.display = "block";
-lorealLogo.style.margin = "16px auto";
-chatWindow.appendChild(lorealLogo);
-
-/* Set initial welcome message */
-const welcomeMsg = document.createElement("div");
-welcomeMsg.textContent =
-  "👋 Hello! I’m your L’Oréal shopping assistant. Ask me about makeup, skincare, haircare, fragrances, or routines!";
-welcomeMsg.className = "msg ai";
-chatWindow.appendChild(welcomeMsg);
 
 /* Replace with your deployed Cloudflare Worker URL */
 const WORKER_URL = "https://holy-sound-7357.rneha2729.workers.dev";
@@ -33,6 +16,31 @@ let messages = [
   },
 ];
 
+/* Load conversation history from localStorage if available */
+function loadHistory() {
+  const saved = localStorage.getItem("loreal_chat_history");
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    // Show each message in the chat window (skip the system message)
+    parsed.forEach((msg) => {
+      if (msg.role === "user") addMessage("user", msg.content);
+      if (msg.role === "assistant") addMessage("ai", msg.content);
+    });
+    // Restore messages array (keep system message at the start)
+    messages = [
+      messages[0], // system message
+      ...parsed.filter(msg => msg.role !== "system")
+    ];
+  }
+}
+
+/* Save conversation history to localStorage (excluding system message) */
+function saveHistory() {
+  // Only save user and assistant messages
+  const toSave = messages.filter(msg => msg.role !== "system");
+  localStorage.setItem("loreal_chat_history", JSON.stringify(toSave));
+}
+
 /* Function to add a message to the chat window */
 function addMessage(sender, text) {
   const msgDiv = document.createElement("div");
@@ -40,6 +48,9 @@ function addMessage(sender, text) {
   msgDiv.textContent = text;
   chatWindow.appendChild(msgDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
+
+  // Save history after each message
+  saveHistory();
 }
 
 /* Handle form submit */
@@ -88,3 +99,12 @@ chatForm.addEventListener("submit", async (e) => {
     addMessage("ai", "Sorry, there was an error connecting to the assistant.");
   }
 });
+
+/* On page load, show welcome message and load history */
+const welcomeMsg = document.createElement("div");
+welcomeMsg.textContent =
+  "👋 Hello! I’m your L’Oréal shopping assistant. Ask me about makeup, skincare, haircare, fragrances, or routines!";
+welcomeMsg.className = "msg ai";
+chatWindow.appendChild(welcomeMsg);
+
+loadHistory();

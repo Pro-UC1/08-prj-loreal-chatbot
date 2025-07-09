@@ -35,6 +35,15 @@ body {
   color: #ae9142; /* L'Oréal gold accent */
 }
 
+/* L'Oréal logo styling */
+.loreal-logo {
+  display: block;
+  margin: 24px auto 8px auto;
+  width: 160px;
+  max-width: 80%;
+  height: auto;
+}
+
 /* chat window */
 .chatbox {
   margin: 40px 0;
